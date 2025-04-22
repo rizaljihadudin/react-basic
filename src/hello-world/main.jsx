@@ -8,6 +8,8 @@ import AlertButton from '../button/AlertButton.jsx';
 import MyButton from '../button/MyButton.jsx';
 import Toolbar from '../button/Toolbar.jsx';
 import SearchForm from '../form/SearchForm.jsx';
+import SayHelloForm from '../form/SayHelloForm.jsx';
+import Counter from '../form/Counter.jsx';
 
 const root = createRoot(document.getElementById('root'));
 
@@ -35,6 +37,8 @@ root.render(
             />
             <SearchForm/>
             <br />
+            <SayHelloForm />
+            <Counter/>
         </Container>
     </StrictMode>
 )
