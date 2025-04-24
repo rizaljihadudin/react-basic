@@ -1,34 +1,60 @@
-import { useState } from "react";
 import NoteForm from "./NoteForm";
 import NoteList from "./NoteList";
+import { useReducer } from "react";
+
+    // Reducer
+function notesReducer(notes, action){
+    switch (action.type) {
+        case "ADD_NOTE":
+            return [
+                ...notes,
+                {
+                    id: id++,
+                    text: action.text,
+                    done: false
+                }
+            ];
+        case "CHANGE_NOTE":
+            return notes.map(note => 
+                note.id == action.id ? {...note, text: action.text, done: action.done} : note
+            );
+        case "DELETE_NOTE":
+            return notes.filter(note => note.id !== action.id);
+        default :
+            return notes;
+    }
+}
+
+let id = 0;
+let initialNotes = [
+    {id: id++, text: 'Belajar React', done: true},
+    {id: id++, text: 'Belajar HTML', done: false},
+    {id: id++, text: 'Belajar NODE', done: false},
+]
 
 export default function NoteApp()
 {
-    let id = 0;
-    let initialNotes = [
-        {id: id++, text: 'Belajar React', done: true},
-        {id: id++, text: 'Belajar HTML', done: false},
-        {id: id++, text: 'Belajar NODE', done: false},
-    ]
+    const [notes, dispatch] = useReducer(notesReducer, initialNotes);
 
-    const [notes, setNotes] = useState(initialNotes);
-
-    function handleAddNote(val){
-        const newNote = {id: id++, text: val, done: false}
-        setNotes([...notes, newNote])
+    function handleAddNote(text){
+        dispatch({
+            type: "ADD_NOTE",
+            text:text
+        });
     }
 
     function handleChangeNote(note){
-        setNotes(draft =>{
-                return draft.map(item => item.id === note.id ? note : item);
-            }
-        );
+        dispatch({
+            type: "CHANGE_NOTE",
+            ...note
+        });
     }
 
     function handleDelete(note){
-        setNotes(draft =>
-            draft.filter(item => item.id !== note.id)
-        );
+        dispatch({
+            type: "DELETE_NOTE",
+            id:note.id
+        });
     }
 
 
