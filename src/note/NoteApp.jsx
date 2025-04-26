@@ -3,7 +3,7 @@ import NoteForm from "./NoteForm";
 import NoteList from "./NoteList";
 import { NotesContext, NotesDispatchContext } from "./NoteContext";
 
-// Reducer 
+// Reducer  
 function notesReducer(notes, action){
     if (action.type == "ADD_NOTE") {
         notes.push({
