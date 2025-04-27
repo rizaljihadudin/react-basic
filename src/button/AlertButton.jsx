@@ -1,8 +1,10 @@
+import { useRef } from "react"
+
 export default function AlertButton({text, msg}){
+    const counter = useRef(0);
 
     function handleClick(){
-        console.log(text)
-        alert(msg)
+        console.log(`${msg} ${counter.current++}`)
     }
 
     return(

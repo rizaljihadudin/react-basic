@@ -14,7 +14,8 @@ export default defineConfig({
         counter:'counter.html',
         kalkulator:'kalkulator.html',
         note:'note.html',
-        profile:'profile.html'
+        profile:'profile.html',
+        timer:'timer.html'
       }
     }
   }
