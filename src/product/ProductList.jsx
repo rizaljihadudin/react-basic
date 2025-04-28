@@ -17,18 +17,37 @@ export default function ProductList(){
 
 
     //use effect dependency
+    // use effect tidak bisa langsung menggunakan async await
+    // useEffect(() => {
+    //     //load ini hanya di panggil jika data dari array [load] berubah, kalo tidak tidak akan di panggil
+    //     if(load){
+
+    //         //promise
+    //         fetch("/products.json")
+    //             .then((response) => response.json())
+    //             .then((data) => setProducts(data));
+    //     }
+
+    //     // Effect clean up
+    //     return () => {
+    //         console.info('Product List component unmounted')
+    //     }
+    // }, [load])
+
+    //useEffect with async function
+
     useEffect(() => {
-        //load ini hanya di panggil jika data dari array [load] berubah, kalo tidak tidak akan di panggil
-        if(load){
-            fetch("/products.json")
-                .then((response) => response.json())
-                .then((data) => setProducts(data));
+
+        async function fetchProducts(){
+            const response = await fetch("/products.json");
+            const data = await response.json();
+            setProducts(data);
         }
 
-        // Effect clean up
-        return () => {
-            console.info('Product List component unmounted')
+        if(load){
+            fetchProducts();
         }
+
     }, [load])
 
     return(
