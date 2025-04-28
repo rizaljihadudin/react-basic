@@ -15,7 +15,8 @@ export default defineConfig({
         kalkulator:'kalkulator.html',
         note:'note.html',
         profile:'profile.html',
-        timer:'timer.html'
+        timer:'timer.html',
+        guestbook:'guestbook.html'
       }
     }
   }
